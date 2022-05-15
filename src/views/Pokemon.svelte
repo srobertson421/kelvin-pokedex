@@ -1,7 +1,8 @@
 <script>
   import { onMount } from 'svelte';
   import Loader from '../components/Loader.svelte';
-  import { fetchCard, currentPokemon, loadingPokemon } from '../state/pokemon';
+  import FavoriteButton from '../components/FavoriteButton.svelte';
+  import { fetchCard, currentPokemon, loadingPokemon, favorites } from '../state/pokemon';
   export let id = '';
 
   onMount(async () => {
@@ -25,6 +26,12 @@
     margin-top: 10px;
     margin-left: 10px;
   }
+  
+  .favorite-row {
+    background-color: rgba(50, 50, 50, 0.6);
+    padding: 10px;
+    margin-top: 16px;
+  }
 </style>
 
 {#if $loadingPokemon}
@@ -39,5 +46,8 @@
   </div>
   <div class="row flex-center">
     <img class="img-responsive" src={$currentPokemon.images.large} alt={$currentPokemon.name} />
+  </div>
+  <div class="row flex-center favorite-row">
+    <FavoriteButton pokemon={$currentPokemon} favorited={!!$favorites.find(fav => fav.id === $currentPokemon.id)} />
   </div>
 {/if}

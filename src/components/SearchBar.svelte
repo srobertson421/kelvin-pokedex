@@ -1,5 +1,5 @@
 <script>
-  import { searchCards, searchQuery } from '../state/pokemon';
+  import { searchCards, searchQuery, fetchFavorites } from '../state/pokemon';
 </script>
 
 <style>

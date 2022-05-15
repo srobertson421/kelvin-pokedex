@@ -1,9 +1,30 @@
 <script>
   import { link } from 'svelte-routing';
-  import { pokemon, favorites } from '../state/pokemon';
-
-  import FavoriteButton from './FavoriteButton.svelte';
+  import { favorites } from '../state/pokemon';
+  import FavoriteButton from '../components/FavoriteButton.svelte';
 </script>
+
+<div class="row flex-center">
+  <h1 class="title">Favorites</h1>
+</div>
+<div class="row flex-start wrap">
+  {#each $favorites as poke}
+    <a class="card-result between align-center" use:link href={`/pokemon/${poke.id}`}>
+      <div class="row flex-center">
+        <img src={poke.images.small} alt={`${poke.name}-${poke.id}`} />
+      </div>
+      <div class="row">
+        <h2 style="text-transform: capitalize;">{ poke.name }</h2>
+      </div>
+      <div class="row">
+        <h4>Set: { poke.set.name }</h4>
+      </div>
+      <div class="row">
+        <FavoriteButton pokemon={poke} favorited={!!$favorites.find(fav => fav.id === poke.id)} />
+      </div>
+    </a>
+  {/each}
+</div>
 
 <style>
   .card-result {
@@ -22,22 +43,3 @@
     color: white;
   }
 </style>
-
-<div class="row flex-start wrap">
-  {#each $pokemon as poke}
-    <a class="card-result between align-center" use:link href={`/pokemon/${poke.id}`}>
-      <div class="row flex-center">
-        <img src={poke.images.small} alt={`${poke.name}-${poke.id}`} />
-      </div>
-      <div class="row">
-        <h2 style="text-transform: capitalize;">{ poke.name }</h2>
-      </div>
-      <div class="row">
-        <h4>Set: { poke.set.name }</h4>
-      </div>
-      <div class="row">
-        <FavoriteButton pokemon={poke} favorited={!!$favorites.find(fav => fav.id === poke.id)} />
-      </div>
-    </a>
-  {/each}
-</div>

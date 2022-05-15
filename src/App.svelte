@@ -1,7 +1,11 @@
 <script>
+  import { onMount } from 'svelte';
+  import { fetchFavorites } from './state/pokemon';
   import Routes from './Routes.svelte';
-  import Pagination from './components/Pagination.svelte';
-  import Test from './components/Test.svelte';
+
+  onMount(() => {
+    fetchFavorites();
+  });
 </script>
 
 <style>
@@ -12,6 +16,7 @@
   :global(body) {
     margin: 0;
     background-color: #d53731;
+    font-family: Arial, Helvetica, sans-serif;
   }
 
   :global(.img-responsive) {
@@ -49,6 +54,10 @@
 
   :global(.align-center) {
     align-items: center;
+  }
+
+  :global(.title) {
+    color: white;
   }
 </style>
 
