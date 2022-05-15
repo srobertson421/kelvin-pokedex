@@ -6,13 +6,13 @@
   import { loadingPokemon } from '../state/pokemon';
 </script>
 
+<SearchBar />
+<Pagination />
 {#if $loadingPokemon}
   <div class="row flex-center">
     <Loader />
   </div>
 {:else}
-  <SearchBar />
-  <Pagination />
   <SearchResults />
-  <Pagination />
 {/if}
+<Pagination />
